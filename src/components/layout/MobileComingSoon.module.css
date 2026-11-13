@@ -1,0 +1,190 @@
+.screen {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  align-items: center;
+  overflow: hidden;
+  padding:
+    max(1.5rem, env(safe-area-inset-top))
+    max(1.5rem, env(safe-area-inset-right))
+    max(1.5rem, env(safe-area-inset-bottom))
+    max(1.5rem, env(safe-area-inset-left));
+  background: var(--bg);
+  color: var(--text);
+  isolation: isolate;
+}
+
+.screen::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-position: center;
+  background-size: 4.5rem 4.5rem;
+  content: "";
+  opacity: 0.18;
+  mask-image: linear-gradient(to bottom, transparent, black 24%, black 76%, transparent);
+}
+
+.content {
+  display: flex;
+  width: min(100%, 56rem);
+  min-height: min(46rem, calc(100dvh - 3rem));
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+  animation: reveal 700ms var(--ease-out) both;
+}
+
+.header,
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.identity {
+  color: var(--text);
+}
+
+.edition,
+.footer {
+  color: var(--text-subtle);
+}
+
+.edition {
+  text-align: right;
+}
+
+.rule {
+  width: 100%;
+  height: 1px;
+  margin: clamp(2.5rem, 9vh, 5.5rem) 0;
+  background: var(--border-strong);
+}
+
+.message {
+  padding: 0 0 clamp(3rem, 10vh, 6rem);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: clamp(1.5rem, 5vh, 2.5rem);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+}
+
+.statusMark {
+  width: 0.45rem;
+  height: 0.45rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-weak);
+}
+
+.message h1 {
+  max-width: 13ch;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 10.5vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.065em;
+  line-height: 0.99;
+}
+
+.period {
+  color: var(--accent);
+}
+
+.description {
+  max-width: 43ch;
+  margin-top: clamp(1.5rem, 5vh, 2.25rem);
+  color: var(--text-muted);
+  font-size: clamp(0.9375rem, 3.8vw, 1.0625rem);
+  line-height: 1.75;
+}
+
+.note {
+  max-width: 43ch;
+  margin-top: 1.25rem;
+  color: var(--text-subtle);
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  margin-top: 1.5rem;
+  border-bottom: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.link:hover {
+  color: var(--accent-hover);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 4px;
+}
+
+.footer {
+  padding-top: 1.125rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.5625rem;
+}
+
+.footerAccent {
+  color: var(--accent);
+  text-align: right;
+}
+
+@media (max-width: 360px) {
+  .header,
+  .footer {
+    font-size: 0.5rem;
+  }
+
+  .message h1 {
+    font-size: clamp(2.35rem, 10.5vw, 2.6rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content {
+    animation: none;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

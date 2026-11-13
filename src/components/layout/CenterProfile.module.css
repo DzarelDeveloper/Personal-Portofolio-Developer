@@ -1,0 +1,82 @@
+.center {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-8);
+  min-width: 0;
+  min-height: 0;
+  padding: var(--shell-pad-y) var(--shell-pad-x);
+  overflow-y: auto;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+/* The portrait grows into whatever vertical space the column has left, and
+   stays bottom-anchored so it reads as standing within the frame. */
+.portraitStage {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+}
+
+.portraitInner {
+  width: min(100%, clamp(270px, 22vw, 400px));
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  text-align: center;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: var(--lh-tight);
+  color: var(--text);
+}
+
+.role {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.tagline {
+  max-width: 36ch;
+  font-size: var(--fs-md);
+  color: var(--text-muted);
+  text-wrap: balance;
+}
+
+@media (max-width: 719px) {
+  .center {
+    order: 1;
+    flex: 0 0 auto;
+    gap: var(--sp-6);
+    overflow: visible;
+    padding-bottom: var(--sp-8);
+  }
+
+  .portraitStage {
+    flex: 0 0 auto;
+  }
+
+  .portraitInner {
+    width: min(100%, clamp(220px, 62vw, 320px));
+  }
+}

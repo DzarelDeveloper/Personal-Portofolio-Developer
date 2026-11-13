@@ -1,0 +1,22 @@
+.note {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  font-style: italic;
+  color: var(--text-subtle);
+}
+
+.empty {
+  padding: var(--sp-4) 0;
+  border-top: var(--border-w) solid var(--border);
+  border-bottom: var(--border-w) solid var(--border);
+}
+
+.mark {
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  border: var(--border-w) solid currentColor;
+  transform: translateY(-1px) rotate(45deg);
+}

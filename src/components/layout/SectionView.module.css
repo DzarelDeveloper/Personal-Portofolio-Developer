@@ -1,0 +1,394 @@
+/* ==========================================================================
+   Full-screen content section — replaces the home composition.
+   ========================================================================== */
+
+.view {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: transparent;
+  animation: viewFade var(--dur-fast) var(--ease-out) both;
+}
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--shell-pad-x);
+  border-bottom: var(--border-w) solid var(--border);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.barEnd {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.back:hover {
+  color: var(--accent);
+}
+
+.barLabel {
+  font-family: var(--font-sans);
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-10);
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: var(--sp-12) var(--shell-pad-x) var(--sp-16);
+  animation: bodyEnter var(--dur-base) var(--ease-out) both;
+}
+
+.skillsBody {
+  max-width: 1280px;
+  height: calc(100dvh - 66px);
+  padding: clamp(1rem, 2.4vh, 1.5rem) var(--shell-pad-x) 0;
+  gap: 0;
+}
+
+.educationBody {
+  max-width: 1120px;
+  gap: clamp(2rem, 5vh, 3.5rem);
+}
+
+.projectsBody {
+  max-width: 1440px;
+  gap: clamp(2rem, 5vh, 3.5rem);
+}
+
+.communityBody {
+  max-width: 100%;
+  padding-right: clamp(1.5rem, 4vw, 4rem);
+  padding-left: clamp(1.5rem, 4vw, 4rem);
+}
+
+.experienceBody {
+  max-width: 100%;
+  min-height: calc(100dvh - 66px);
+  gap: 0;
+  padding: clamp(1.5rem, 3.5vh, 2.5rem) var(--shell-pad-x) var(--sp-8);
+}
+
+.recognitionBody {
+  max-width: 1600px;
+  min-height: calc(100dvh - 66px);
+  gap: 0;
+  padding: clamp(1.25rem, 3vh, 2.5rem) clamp(1rem, 3vw, 3rem) var(--sp-6);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: var(--lh-tight);
+  color: var(--text);
+}
+
+.lead {
+  max-width: 56ch;
+  font-size: var(--fs-lg);
+  line-height: var(--lh-normal);
+  color: var(--text-muted);
+}
+
+.aboutBody {
+  display: block;
+  max-width: 1440px;
+  min-height: calc(100dvh - 62px);
+  padding: clamp(2.5rem, 6vh, 5rem) clamp(1.5rem, 6vw, 6rem) var(--sp-16);
+  animation: none;
+}
+
+.projectsView {
+  view-transition-name: project-section;
+}
+
+.aboutColumn {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  align-items: start;
+  gap: clamp(2.5rem, 7vw, 7rem);
+}
+
+.aboutContent {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: clamp(2.5rem, 6vh, 4.5rem);
+  view-transition-name: about-content;
+}
+
+.aboutHead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-4);
+}
+
+.aboutEyebrow {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.aboutHead .title {
+  max-width: 12ch;
+}
+
+.aboutHead .lead {
+  max-width: 48ch;
+  font-size: clamp(1.1rem, 1rem + 0.45vw, 1.35rem);
+}
+
+.aboutPortrait {
+  position: fixed;
+  right: clamp(2rem, 5vw, 5.5rem);
+  bottom: 0;
+  z-index: var(--z-base);
+  display: flex;
+  width: clamp(440px, 40vw, 580px);
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.aboutPortrait picture {
+  width: 100%;
+}
+
+.contactBody {
+  display: block;
+  width: 100%;
+  max-width: 1440px;
+  min-height: calc(100dvh - 66px);
+  padding: clamp(2.5rem, 6vh, 5rem) clamp(1.5rem, 6vw, 6rem) var(--sp-16);
+  animation: none;
+}
+
+.contactBody > * {
+  animation: none;
+}
+
+.contactColumn {
+  min-height: calc(100dvh - 66px - clamp(2.5rem, 6vh, 5rem) - var(--sp-16));
+}
+
+.contactContent {
+  display: flex;
+  width: min(53%, 680px);
+  flex-direction: column;
+  gap: clamp(2rem, 5vh, 3.5rem);
+  margin-left: auto;
+  padding-top: clamp(1rem, 5vh, 3.5rem);
+  view-transition-name: about-content;
+}
+
+.contactHead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-4);
+}
+
+.contactHead .title {
+  max-width: 13ch;
+}
+
+.contactLead {
+  max-width: 48ch;
+  font-size: clamp(1.1rem, 1rem + 0.45vw, 1.35rem);
+  line-height: var(--lh-normal);
+  color: var(--text-muted);
+}
+
+.contactPortrait {
+  position: fixed;
+  left: clamp(2rem, 5vw, 5.5rem);
+  bottom: 0;
+  z-index: var(--z-base);
+  display: flex;
+  width: clamp(440px, 40vw, 580px);
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.contactPortrait picture {
+  width: 100%;
+}
+
+/* Short opacity fade; the slight movement is carried by the body so the sticky
+   bar never sits inside a transformed ancestor. */
+@keyframes viewFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bodyEnter {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 719px) {
+  .body {
+    gap: var(--sp-8);
+    padding: var(--sp-8) var(--shell-pad-x) var(--sp-12);
+  }
+
+  .experienceBody {
+    min-height: calc(100dvh - 66px);
+    padding: var(--sp-8) var(--shell-pad-x) var(--sp-12);
+  }
+
+  .barEnd {
+    gap: var(--sp-2);
+  }
+
+  .barLabel {
+    display: none;
+  }
+
+  .aboutBody {
+    min-height: auto;
+    padding: var(--sp-8) var(--shell-pad-x) var(--sp-12);
+  }
+
+  .aboutColumn {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-8);
+  }
+
+  .aboutContent {
+    gap: var(--sp-8);
+  }
+
+  .aboutPortrait {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    min-height: 0;
+    grid-row: 2;
+    width: auto;
+    margin: 0 auto;
+    pointer-events: auto;
+  }
+
+  .aboutPortrait picture {
+    width: min(76vw, 360px);
+  }
+
+  .contactBody {
+    min-height: auto;
+    padding: var(--sp-8) var(--shell-pad-x) var(--sp-12);
+  }
+
+  .contactColumn {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    gap: var(--sp-8);
+  }
+
+  .contactContent {
+    order: 2;
+    width: 100%;
+    gap: var(--sp-8);
+    padding-top: 0;
+  }
+
+  .contactPortrait {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    order: 1;
+    width: auto;
+    margin: 0 auto;
+    pointer-events: auto;
+  }
+
+  .contactPortrait picture {
+    width: min(76vw, 360px);
+  }
+}
+
+@media (min-width: 720px) and (max-width: 980px) {
+  .aboutColumn {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.7fr);
+    gap: var(--sp-8);
+  }
+
+  .aboutPortrait {
+    right: var(--shell-pad-x);
+    width: clamp(300px, 36vw, 400px);
+  }
+
+  .contactContent {
+    width: 54%;
+  }
+
+  .contactPortrait {
+    left: var(--shell-pad-x);
+    width: clamp(300px, 36vw, 400px);
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1100px) {
+  .contactContent {
+    width: 54%;
+  }
+
+  .contactPortrait {
+    left: var(--shell-pad-x);
+    width: clamp(300px, 36vw, 400px);
+  }
+}

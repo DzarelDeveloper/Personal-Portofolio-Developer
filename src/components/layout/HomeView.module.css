@@ -1,0 +1,190 @@
+/* ==========================================================================
+   Home composition — a fixed three-column arrangement, centred in the
+   viewport: personal navigation · portrait · professional navigation.
+   ========================================================================== */
+
+.home {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: clamp(1.5rem, 5vw, 5rem);
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: var(--shell-pad-y) var(--shell-pad-x);
+  background: transparent;
+  animation: homeEnter var(--dur-fast) var(--ease-out) both;
+}
+
+/* Nudged toward the portrait so the three parts read as one centred group
+   while the outer columns keep the composition balanced. */
+.left {
+  justify-self: end;
+  width: 100%;
+  max-width: var(--nav-w);
+  view-transition-name: home-personal-nav;
+}
+
+.right {
+  justify-self: start;
+  width: 100%;
+  max-width: var(--nav-w);
+  view-transition-name: home-professional-nav;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  position: relative;
+  min-width: 0;
+  margin-bottom: calc(-1 * var(--shell-pad-y));
+}
+
+.tagline {
+  position: absolute;
+  top: clamp(14rem, 33vh, 19rem);
+  inset-inline: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: clamp(0.75rem, 1vw, 0.9375rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  pointer-events: none;
+}
+
+.taglineFirst,
+.taglineSecond {
+  position: relative;
+  width: 38%;
+  animation: taglineEnter 850ms var(--ease-out) both;
+}
+
+.taglineFirst {
+  color: var(--accent);
+  text-align: left;
+}
+
+.taglineSecond {
+  width: 43%;
+  text-align: right;
+  text-wrap: pretty;
+  animation-delay: 140ms;
+}
+
+.taglineFirst::after,
+.taglineSecond::after {
+  content: "";
+  position: absolute;
+  top: 0.7em;
+  width: clamp(1.25rem, 2.5vw, 2.25rem);
+  height: 1px;
+  background: var(--accent-weak-strong);
+}
+
+.taglineFirst::after {
+  right: calc(100% + var(--sp-3));
+}
+
+.taglineSecond::after {
+  left: calc(100% + var(--sp-3));
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding-top: clamp(2rem, 7vh, 5rem);
+}
+
+.portrait {
+  flex: 0 0 auto;
+  width: min(86vw, clamp(400px, 60vh, 600px));
+}
+
+@keyframes taglineEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes homeEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (min-width: 720px) and (max-width: 980px) {
+  .home {
+    grid-template-columns: minmax(0, 1fr) minmax(0, min(38vw, 320px)) minmax(0, 1fr);
+    column-gap: clamp(1rem, 2.5vw, 1.5rem);
+  }
+
+  .portrait {
+    width: 100%;
+  }
+
+  .tagline {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Mobile — a deliberate single column: portrait first, then the two
+   navigation lists, each keeping the alignment it has on desktop.
+   ========================================================================== */
+@media (max-width: 719px) {
+  .home {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+    row-gap: var(--sp-8);
+    padding: var(--sp-6) var(--shell-pad-x) var(--sp-12);
+  }
+
+  .center {
+    order: 1;
+    align-self: auto;
+    justify-content: flex-start;
+    gap: clamp(1.5rem, 4vh, 2.75rem);
+    margin-bottom: 0;
+  }
+
+  .left {
+    order: 2;
+    justify-self: stretch;
+    max-width: none;
+  }
+
+  .right {
+    order: 3;
+    justify-self: stretch;
+    max-width: none;
+  }
+
+  .portrait {
+    width: min(76vw, 330px);
+  }
+
+  .tagline {
+    display: none;
+  }
+
+  .controls {
+    gap: 2px;
+    padding-top: 0;
+  }
+}

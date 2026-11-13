@@ -1,0 +1,80 @@
+/* ==========================================================================
+   Stage — holds whichever of the two visual states is showing.
+   ========================================================================== */
+
+.experience {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.desktopExperience {
+  display: block;
+}
+
+.mobileExperience {
+  display: none;
+}
+
+.stage {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.stage::before,
+.stage::after {
+  content: "";
+  position: fixed;
+  inset: -12%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.stage::before {
+  background:
+    radial-gradient(ellipse at 14% 20%, var(--accent-weak-strong), transparent 42%),
+    radial-gradient(ellipse at 86% 78%, var(--accent-weak), transparent 40%);
+  opacity: 0.68;
+}
+
+.stage::after {
+  inset: -28%;
+  background:
+    radial-gradient(ellipse at 32% 38%, var(--accent-weak), transparent 35%),
+    radial-gradient(ellipse at 74% 66%, var(--accent-weak-strong), transparent 32%);
+  opacity: 0.25;
+}
+
+:root[data-theme="light"] .stage::before {
+  background:
+    radial-gradient(ellipse at 14% 20%, rgba(29, 78, 216, 0.14), transparent 42%),
+    radial-gradient(ellipse at 86% 78%, rgba(29, 78, 216, 0.08), transparent 40%);
+  opacity: 0.82;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage::before {
+    background:
+      radial-gradient(ellipse at 14% 20%, var(--accent-weak), transparent 42%),
+      radial-gradient(ellipse at 86% 78%, var(--accent-weak), transparent 40%);
+  }
+}
+
+@media (max-width: 719px), (pointer: coarse) {
+  .stage::before {
+    background:
+      radial-gradient(ellipse at 14% 20%, var(--accent-weak), transparent 42%),
+      radial-gradient(ellipse at 86% 78%, var(--accent-weak), transparent 40%);
+  }
+}
+
+@media (max-width: 767px) {
+  .desktopExperience {
+    display: none;
+  }
+
+  .mobileExperience {
+    display: block;
+  }
+}

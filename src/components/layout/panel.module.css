@@ -1,0 +1,168 @@
+/* ==========================================================================
+   Shared chrome for the two side panels (personal · professional).
+   One set of rules, mirrored by `data-side` — the pair is never duplicated.
+   ========================================================================== */
+
+.side {
+  --side-w-collapsed: var(--nav-w);
+  --side-w-expanded: var(--panel-w);
+
+  position: relative;
+  flex: 0 0 auto;
+  width: var(--side-w-collapsed);
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  transition: width var(--dur-base) var(--ease);
+}
+
+.side[data-expanded] {
+  width: var(--side-w-expanded);
+}
+
+/* Thin separators instead of filled dividers. */
+.side[data-side="left"] {
+  border-right: var(--border-w) solid var(--border);
+}
+
+.side[data-side="right"] {
+  border-left: var(--border-w) solid var(--border);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  min-height: 100%;
+  padding: var(--shell-pad-y) clamp(1rem, 1.6vw, 1.6rem);
+}
+
+/* ---- Header: panel label + return control ----------------------------- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  min-height: 22px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.back:hover {
+  color: var(--accent);
+}
+
+/* ---- Expanded section body ------------------------------------------- */
+.outlet {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  padding-top: var(--sp-6);
+  border-top: var(--border-w) solid var(--border);
+  animation-duration: var(--dur-slow);
+  animation-timing-function: var(--ease-out);
+  animation-fill-mode: both;
+}
+
+.side[data-side="left"] .outlet {
+  animation-name: outletFromLeft;
+}
+
+.side[data-side="right"] .outlet {
+  animation-name: outletFromRight;
+}
+
+@keyframes outletFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes outletFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.sectionHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--text);
+}
+
+.sectionLead {
+  font-size: var(--fs-md);
+  line-height: var(--lh-normal);
+  color: var(--text-muted);
+  max-width: 48ch;
+}
+
+/* ==========================================================================
+   Tablet — narrow the columns, never let the panels crowd the portrait
+   ========================================================================== */
+@media (min-width: 720px) and (max-width: 1099px) {
+  .side {
+    --side-w-collapsed: clamp(156px, 20vw, 188px);
+    --side-w-expanded: min(48vw, 420px);
+  }
+
+  .inner {
+    padding: var(--sp-6) var(--sp-5);
+  }
+}
+
+/* ==========================================================================
+   Mobile — panels become full-width stacked sections below the portrait
+   ========================================================================== */
+@media (max-width: 719px) {
+  .side {
+    width: 100%;
+    overflow: visible;
+  }
+
+  .side[data-side="left"] {
+    order: 2;
+    border-right: 0;
+    border-top: var(--border-w) solid var(--border);
+  }
+
+  .side[data-side="right"] {
+    order: 3;
+    border-left: 0;
+    border-top: var(--border-w) solid var(--border);
+  }
+
+  .inner {
+    min-height: 0;
+    padding: var(--sp-6) var(--shell-pad-x);
+  }
+}

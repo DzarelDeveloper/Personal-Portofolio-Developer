@@ -1,0 +1,132 @@
+/* ==========================================================================
+   Shared layout primitives used by more than one panel.
+   Component-specific rules live in their own *.module.css files.
+   ========================================================================== */
+
+/* ---- Eyebrow / section label ------------------------------------------ */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+/* ---- Thin horizontal rule -------------------------------------------- */
+.rule {
+  height: 1px;
+  background: var(--border);
+  border: 0;
+}
+
+/* ---- Generic vertical rhythm stack ----------------------------------- */
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack--2 {
+  gap: var(--sp-2);
+}
+.stack--3 {
+  gap: var(--sp-3);
+}
+.stack--4 {
+  gap: var(--sp-4);
+}
+.stack--6 {
+  gap: var(--sp-6);
+}
+.stack--8 {
+  gap: var(--sp-8);
+}
+
+/* ---- Definition row: label / value ----------------------------------- */
+.metaRow {
+  display: grid;
+  grid-template-columns: minmax(84px, 32%) 1fr;
+  gap: var(--sp-4);
+  padding: var(--sp-3) 0;
+  border-bottom: var(--border-w) solid var(--border);
+  align-items: baseline;
+}
+
+.metaRow:last-child {
+  border-bottom: 0;
+}
+
+.metaLabel {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.metaValue {
+  font-size: var(--fs-base);
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+/* ---- Body copy -------------------------------------------------------- */
+.prose {
+  font-size: var(--fs-md);
+  line-height: var(--lh-normal);
+  color: var(--text-muted);
+}
+
+.prose + .prose {
+  margin-top: var(--sp-4);
+}
+
+/* ---- Chip row (skills, tech, tags) ----------------------------------- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-1) var(--sp-5) var(--sp-1) var(--sp-3);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+
+.chip--accent {
+  color: var(--accent);
+  border-color: var(--accent-weak-strong);
+  background: var(--accent-weak);
+}
+
+/* ---- Index numeral (editorial list numbering) ------------------------ */
+.indexNumeral {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-subtle);
+}
+
+/* ---- "Awaiting verified detail" note --------------------------------- */
+.pendingNote {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  font-style: italic;
+  color: var(--text-subtle);
+}
+
+.pendingNote__mark {
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  border: var(--border-w) solid currentColor;
+  transform: translateY(-1px) rotate(45deg);
+}

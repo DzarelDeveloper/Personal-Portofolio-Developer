@@ -1,0 +1,18 @@
+.picture {
+  display: block;
+  width: 100%;
+  view-transition-name: about-portrait;
+}
+
+/*
+ * The source cutout is already cropped at the chest, so the portrait reads as
+ * standing behind the bottom edge of the frame — no scaling, no distortion.
+ */
+.image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: bottom center;
+  user-select: none;
+  -webkit-user-drag: none;
+}

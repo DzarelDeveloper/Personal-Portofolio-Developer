@@ -1,0 +1,242 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 5vw, 5.5rem);
+}
+
+.community {
+  min-width: 0;
+  animation: communityReveal 600ms var(--ease-out) both;
+}
+
+.community:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+.community + .community {
+  padding-left: clamp(1.5rem, 3vw, 3rem);
+  border-left: 1px solid var(--border);
+}
+
+.logoFrame {
+  display: grid;
+  min-height: clamp(10rem, 22vw, 17rem);
+  place-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-position: center;
+  background-size: 3rem 3rem;
+  transition: background-size 500ms var(--ease-out);
+}
+
+.community:hover .logoFrame {
+  background-size: 3.2rem 3.2rem;
+}
+
+.logoBadge {
+  display: grid;
+  width: clamp(8rem, 13vw, 11rem);
+  aspect-ratio: 1;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: #0b0c10;
+  box-shadow: inset 0 0 0 0.5rem rgba(255, 255, 255, 0.025);
+  transition:
+    border-color var(--dur-base) var(--ease),
+    transform 500ms var(--ease-out);
+}
+
+.community:hover .logoBadge {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.logo {
+  width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+  transition: transform 500ms var(--ease-out);
+}
+
+.community:hover .logo {
+  transform: scale(1.04);
+}
+
+.logoPending {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border-strong);
+  background: var(--bg);
+  color: var(--text-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: var(--tracking-wide);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.identity {
+  padding: clamp(1.25rem, 2.5vw, 2rem) 0 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.index,
+.detail h3,
+.socials h3 {
+  color: var(--text-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.name {
+  margin-top: 0.7rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 1.05;
+}
+
+.role {
+  margin-top: 0.7rem;
+  color: var(--accent);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.details {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: minmax(6rem, 0.42fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.detail h3 {
+  padding-top: 0.16rem;
+}
+
+.tagline,
+.summary {
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+}
+
+.tagline {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+}
+
+.pending {
+  color: var(--text-subtle);
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+}
+
+.socials {
+  display: grid;
+  grid-template-columns: minmax(6rem, 0.42fr) minmax(0, 1fr);
+  gap: 1rem;
+  padding-top: 1.5rem;
+}
+
+.socialList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+}
+
+.socialLink {
+  display: inline-flex;
+  min-height: 2rem;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text);
+  font-size: var(--fs-sm);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.socialLink:hover {
+  color: var(--accent);
+}
+
+.socialLink:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+@keyframes communityReveal {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 860px) {
+  .grid {
+    gap: 1.5rem;
+  }
+
+  .community + .community {
+    padding-left: 1.5rem;
+  }
+
+  .detail,
+  .socials {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 719px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+
+  .community + .community {
+    padding-top: 2.5rem;
+    padding-left: 0;
+    border-top: 1px solid var(--border);
+    border-left: 0;
+  }
+
+  .logoFrame {
+    min-height: 12rem;
+  }
+
+  .logoBadge {
+    width: min(9rem, 52vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .community,
+  .logo,
+  .logoFrame,
+  .logoBadge {
+    animation: none;
+    transition: none;
+  }
+}
